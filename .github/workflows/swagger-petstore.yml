@@ -1,0 +1,27 @@
+name: Swagger Petstore API Interaction
+
+on:
+  push:
+    branches:
+      - main  # هر زمان که به شاخه main push شود، این اکشن اجرا می‌شود
+
+jobs:
+  call-api:
+    runs-on: ubuntu-latest  # این اکشن روی سیستم عامل لینوکس اجرا می‌شود
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2  # ریپازیتوری را بررسی می‌کند
+
+    - name: Set up Python
+      uses: actions/setup-python@v2  # نصب پایتون
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        pip install requests  # نصب کتابخانه requests برای ارسال درخواست‌ها
+
+    - name: Call Swagger Petstore API
+      run: |
+        python call_api.py  # اجرای اسکریپت Python برای فراخوانی API
